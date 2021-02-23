@@ -17,8 +17,22 @@ def get_html(url):
 def refine_p(p):
     return p.replace(' ','')
 
+def refine_z(n):
+
+    list = ["Шкаф газовый ШГР ",'Шкаф газовый ШГР']
+
+    split_line = n.split()
+    for word in split_line:
+        if word in list:
+            n=None
+    return n
+
+    #         split_line.remove(word)
+    # output = ' '.join(split_line)
+    # return output
+
 def write_csv(data):
-    with open('cmc.csv', 'a',encoding='utf-8') as f:
+    with open('cmcprobe1.csv', 'a',encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerow((data['name'], data['price']))
 
@@ -29,7 +43,8 @@ def get_page_data(html):
 
     for li in lis:
         try:
-            name = li.find('div', class_='item-title').find('a').text.strip()
+            n = li.find('div', class_='item-title').find('a').text.strip()
+            name = refine_z(n)
         except:
             name = ''
 
@@ -51,7 +66,7 @@ def main():
 
     pattern = 'https://xn--c1azcgcc.xn----7sbenacbbl2bhik1tlb.xn--p1ai/catalog/metallicheskie-shkafy/?PAGEN_1={}'
 
-    for i in range(0, 60):
+    for i in range(1, 3):
         url = pattern.format(str(i))
         get_page_data(get_html(url))
 
