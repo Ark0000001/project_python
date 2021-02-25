@@ -82,7 +82,7 @@ def get_page_data(html):
 
 
 def main():
-    url = 'https://www.safe.ru/catalog/metallicheskie-stellazhi/ms-strong-750-kg-na-sektsiyu/'
+    url = 'https://www.safe.ru/catalog/metallicheskie-stellazhi/ms-pro-3000-kg-na-sektsiyu/'
     get_page_data(get_html(url))
 
 
